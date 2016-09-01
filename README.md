@@ -45,6 +45,6 @@ SSH password:
   * -u => User
   * -m => Ansible module
   * -a => Attribute to the module (for the command module. This is the command to run.)
-  * -v(vv) => Be verbose, very verbose, or very, very verbose
+  * -v(vv) => Be verbose, very verbose, or very,   very verbose
 
 The `command` module executes commands inside the Python context. The `shell` module executes commands in a shell, and thus has access to environment variables.
