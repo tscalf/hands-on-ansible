@@ -1,0 +1,8 @@
+---
+# file: group_vars/all
+
+#This is our user
+username: all_username
+
+ansible-ssh-user: vagrant
+ansible-ssh-pass: vagrant
