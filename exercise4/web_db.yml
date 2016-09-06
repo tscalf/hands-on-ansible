@@ -1,0 +1,32 @@
+---
+# Install the web and DB servers.
+
+# This is play #1
+- hosts: web
+  sudo: yes
+
+  tasks:
+    - name: Ensure HTTPD is installed
+      yum: name=httpd state=present
+
+    - name: Ensure HTTPD is running
+      service: name=httpd state=started enabled=yes
+
+# This is play #2
+- hosts: db
+  sudo: yes
+
+  tasks:
+    - name: Ensure Mysql-server is installed
+      yum: name=mysql-server state=present
+
+    - name: Ensure Mysqld is running and enabled
+      service: name=mysqld state=started enabled=yes
+
+# This is play #3
+- hosts: web:db
+  sudo: yes
+
+  tasks:
+    - name: Turn off IP Tables
+      service: name=iptables enabled=no state=stopped
