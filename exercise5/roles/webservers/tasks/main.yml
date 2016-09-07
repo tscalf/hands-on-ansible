@@ -1,0 +1,14 @@
+---
+- name: Ensure HTTPD is installed
+  yum: name=httpd state=present
+
+- name: Ensure HTTPD is running
+  service: name=httpd state=started enabled=yes
+- name: Deploy HTTPD Config file
+  template: src=httpd.j2 dest=/etc/httpd/conf/httpd.conf
+  notify:
+    - Restart Apache
+- name: Create the doc_root directory.
+  file: path={{ doc_root }} state=directory mode=0755
+- name: Deploy Site Files
+  template: src=index.j2 dest={{ doc_root }}/index.html
