@@ -1,0 +1,9 @@
+---
+monyog_root: /usr/local/MONyog
+monyog_port: 5555
+monyog_Password: null
+monyog_Data_Path: "{{ monyog_root}}/data/"
+monyog_registration_name: null
+monyog_registration_key: null
+monyog_registration_install_id: null
+monyog_jsruntime_size: 1024

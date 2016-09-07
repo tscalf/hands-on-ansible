@@ -1,0 +1,40 @@
+---
+
+- name: add custom repo for testing
+  yum_repository:
+    name: fnrpms
+    description: s3 bucket full of rpms
+    baseurl: "http://fnrpms.s3-website-us-east-1.amazonaws.com/$releasever/$basearch"
+    gpgcheck: no
+    enabled: yes
+
+- name: Install the MONyog rpm
+  yum:
+    name: MONyog
+    state: present
+
+- name: Write MONyog Config
+  template:
+    src: MONyog.ini.j2
+    dest: "{{ monyog_root }}/MONyog.ini"
+  notify:
+    - Restart MONyog
+
+- name: Enable and start the MONyogd service
+  service:
+    name: MONyogd
+    state: started
+    enabled: on
+
+# - name: Allow connection to MONyog via iptables
+  # iptables:
+    # chain: INPUT
+    # comment: Allow MONyog Connections - Managed by Ansible
+    # destination_port: "{{ monyog_port }}"
+    # protocol: tcp
+    # jump: ACCEPT
+
+- name: Stop iptables for now.
+  service:
+    name: iptables
+    state: stopped
